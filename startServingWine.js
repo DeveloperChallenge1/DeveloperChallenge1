@@ -1,19 +1,16 @@
+// process.env
+
 var restify = require('restify');
 
-const server = restify.createServer({
-  name: 'myapp',
-  version: '1.0.0'
-});
+function respond(req, res, next) {
+  res.send('hello ' + req.params.name);
+  next();
+}
 
-server.use(restify.plugins.acceptParser(server.acceptable));
-server.use(restify.plugins.queryParser());
-server.use(restify.plugins.bodyParser());
+var server = restify.createServer();
+server.get('/hello/:name', respond);
+server.head('/hello/:name', respond);
 
-server.get('/echo/:name', function (req, res, next) {
-  res.send(req.params);
-  return next();
-});
-
-server.listen(8080, function () {
+server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
