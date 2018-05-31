@@ -4,6 +4,7 @@
   "description": "A JavaScript RESTful API using MongoDB for providing a virtual wine cellar. Deployed on Heroku.",
   "main": "startServingWine.js",
   "scripts": {
+"start": "startServingWine.js"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
