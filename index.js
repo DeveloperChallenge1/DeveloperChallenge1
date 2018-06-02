@@ -5,7 +5,8 @@ var restify = require('restify');
 function respond(req, res, next) {
   //res.send('hello ' + req.params.name);
   res.contentType= 'json';
-  res.send({name: 'tester2'});
+  res.header('content-type', 'json');
+  res.send({name: 'tester2',id: '7'});
     console.log('responding: hello + %s \n', req.params.name);
   next();
 }
