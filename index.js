@@ -4,7 +4,8 @@ var restify = require('restify');
 
 function respond(req, res, next) {
   //res.send('hello ' + req.params.name);
-  res.send('sending back to curl');
+  res.contentType= 'json';
+  res.send({name: 'tester2'});
     console.log('responding: hello + %s \n', req.params.name);
   next();
 }
