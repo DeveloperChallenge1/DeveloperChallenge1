@@ -4,6 +4,7 @@ var restify = require('restify');
 
 function respond(req, res, next) {
   res.send('hello ' + req.params.name);
+    console.log('responding...\n');
   next();
 }
 
