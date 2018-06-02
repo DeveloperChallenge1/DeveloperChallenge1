@@ -1,0 +1,8 @@
+{
+  "name": "VirtualWineCellar",
+  "description": "Manages virtual entitites of your wine.",
+  "repository": "https://github.com/DeveloperChallenge1/DeveloperChallenge1.git",
+  "logo": "",
+  "keywords": [],
+  "image": "heroku/nodejs"
+}
