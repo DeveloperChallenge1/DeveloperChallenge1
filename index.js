@@ -6,17 +6,17 @@ const trueLiteral='true';
 var wineDataBaseSchema=null;
 
 
-function boolean isTrue(String environmentVariable)
+function isTrue(String environmentVariable)
 {
   return(environmentVariable== trueLiteral);
 }
 
-function boolean isDebugging()
+function isDebugging()
 {
   return isTrue(process.env.isDebugging);
 }
 
-function boolean isDataBaseInitialized()
+function isDataBaseInitialized()
 {
     return isTrue(process.env.database_initiated);
 }
@@ -27,7 +27,7 @@ function broadCastDatabaseInititation()
 }
 
 
-function Schema wineDataBaseModellSchema()
+function wineDataBaseModellSchema()
 {
   if(wineDataBaseSchema==null)
   {
