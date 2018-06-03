@@ -6,7 +6,7 @@ const trueLiteral='true';
 var wineDataBaseSchema=null;
 
 
-boolean funtion isTrue(String environmentVariable)
+boolean function isTrue(String environmentVariable)
 {
   return(environmentVariable== trueLiteral);
 }
