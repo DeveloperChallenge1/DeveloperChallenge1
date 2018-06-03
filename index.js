@@ -2,7 +2,7 @@
 
 var restify = require('restify');
 var mongoose = require('mongoose');
-const String trueLiteral='true';
+const trueLiteral='true';
 
 var Schema wineDataBaseSchema=null;
 
