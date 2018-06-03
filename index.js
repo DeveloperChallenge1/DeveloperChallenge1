@@ -4,10 +4,12 @@ var restify = require('restify');
 var mongoose = require('mongoose');
 const String trueLiteral='true';
 
+var Schema wineDataBaseSchema=null;
+
 
 boolean funtion isTrue(String environmentVariable)
 {
-  return(environmentVariable== trueLiteral)
+  return(environmentVariable== trueLiteral);
 }
 
 function boolean isDebugging()
@@ -26,12 +28,30 @@ function broadCastDatabaseInititation()
 }
 
 
+function Schema wineDataBaseModellSchema()
+{
+  if(wineDataBaseSchema==null)
+  {
+  var wineDataBaseSchema = new Schema({
+    id: Number,
+    name:String,
+    year:Number,
+    country:String,
+    type: String,
+    description: String
+  });
+  }
+return wineDataBaseSchema;
+}
+
+
 function checkIfDatabaseIsInitialisedAndInitializeIfApplicable()
 {
-
   if(isDataBaseInitialized())
   {
     console.log('initializing DataBase');
+
+    // create table schmea here
     broadCastDatabaseInititation();
     console.log('db is initialized');
   }
@@ -54,7 +74,9 @@ function respond(req, res, next) {
 
 console.log('VirtualWineCellar started.\n');
 
-var server = restify.createServer();
+var server = restify.createServer({
+  acceptable: 'application/json',
+});
 server.get('/hello/:name', respond);
 server.head('/hello/:name', respond);
 
