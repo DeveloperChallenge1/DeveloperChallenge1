@@ -3,7 +3,7 @@
 var restify = require('restify');
 var mongoose = require('mongoose');
 
-/*
+
 function checkIfDatabaseIsInitialisedAndInitializeIfApplicable()
 {
   if(process.env.database_initiated)
@@ -16,7 +16,7 @@ function checkIfDatabaseIsInitialisedAndInitializeIfApplicable()
   }
 }
 
-*/
+
 
 function respond(req, res, next) {
   //res.send('hello ' + req.params.name);
@@ -39,6 +39,9 @@ console.log('connecting to MongoDB: process.env.URL_to_MongoDB...');
 db=mongoose.connect(process.env.URL_to_MongoDB);
 //Schema=mongoose.Schema;
 console.log('successfull.\n');
+console.log('Checking database...');
+checkIfDatabaseIsInitialisedAndInitializeIfApplicable();
+console.log('finished.\n');
 
 
 
