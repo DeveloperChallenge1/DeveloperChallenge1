@@ -4,6 +4,7 @@ var restify = require('restify');
 var mongoose = require('mongoose');
 const trueLiteral='true';
 var wineDataBaseSchema=null;
+var WineModell=null;
 
 
 function isTrue(environmentVariable)
@@ -30,56 +31,57 @@ function broadCastDatabaseInititation()
 
 
 
-class Wine
-{
-
-  static function wineDataBaseModellSchema()
+  function getWineDataBaseSchema()
   {
     if(wineDataBaseSchema==null)
     {
-    wineDataBaseSchema = new Schema({
+      wineDataBaseSchema = new Schema({
       id: Number,
       name:String,
       year:Number,
       country:String,
       type: String,
       description: String
-    });
+      });
+
+      wineDataBaseSchema.methods.isLegalWineType=function(typeKandidate)
+      {
+        return(typeKandidate=="rose" || typeKandidate=="red" || typeKandidate=="white")
+      };
+
+      wineDataBaseSchema.methods.updateDescription=function(newDescriptionOfWine)
+      {
+        this.descrption=newDescriptionOfWine;
+      };
+
+      wineDataBaseSchema.methods.updateYear=function(updatedYear)
+      {
+        this.year=updatedYear;
+      };
+
+        wineDataBaseSchema.methods.updateCountry=function(updatedCountry)
+      {
+        this.country=updatedCountry;
+      };
+
+      wineDataBaseSchema.methods.updateName=function(updatedName)
+      {
+        this.name=updatedName;
+      }
     }
     return wineDataBaseSchema;
   }
 
+
+/*
   constructor(name,year,country,type)
   {
     //put verficitation of parameters here
     this.model=new WineModel({name: name,year:year,country:country,type:type,description:''});
 
-  }
+  }*/
 
-  static function isLegalWineType(typeKandidate)
-  {
-    return(typeKandidate=="rose" || typeKandidate=="red" || typeKandidate=="white")
-  }
 
-  updateDescription(newDescriptionOfWine)
-  {
-    this.descrption=newDescriptionOfWine;
-  }
-
-  updateYear(updatedYear)
-  {
-    this.year=updatedYear;
-  }
-
-  updateCountry(updatedCountry)
-  {
-    this.country=updatedCountry;
-  }
-
-  updateCountry(updatedCountry)
-  {
-    this.country=updatedCountry;
-  }
 
 }
 
@@ -124,7 +126,7 @@ server.head('/hello/:name', respond);
 console.log('connecting to MongoDB: process.env.URL_to_MongoDB...');
 db=mongoose.connect(process.env.URL_to_MongoDB);
 //Schema=mongoose.Schema;
-Wine.WineModel = mongoose.model('WineModel', Wine.wineDataBaseModellSchema());
+WineModel = mongoose.model('WineModel',getWineDataBaseSchema());
 console.log('successfull.\n');
 
 console.log('Checking database...');
