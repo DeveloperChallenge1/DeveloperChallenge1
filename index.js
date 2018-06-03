@@ -3,8 +3,7 @@
 var restify = require('restify');
 var mongoose = require('mongoose');
 const trueLiteral='true';
-
-var Schema wineDataBaseSchema=null;
+var wineDataBaseSchema=null;
 
 
 boolean funtion isTrue(String environmentVariable)
