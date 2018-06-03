@@ -6,7 +6,7 @@ const trueLiteral='true';
 var wineDataBaseSchema=null;
 
 
-function isTrue(String environmentVariable)
+function isTrue(environmentVariable)
 {
   return(environmentVariable== trueLiteral);
 }
@@ -72,7 +72,6 @@ function respond(req, res, next) {
 }
 
 console.log('VirtualWineCellar started.\n');
-
 var server = restify.createServer({
   acceptable: 'application/json',
 });
