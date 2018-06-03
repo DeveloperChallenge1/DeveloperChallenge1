@@ -8,7 +8,7 @@ var wineDataBaseSchema=null;
 
 function isTrue(environmentVariable)
 {
-  return(environmentVariable== trueLiteral);
+  return(environmentVariable == trueLiteral);
 }
 
 function isDebugging()
@@ -27,20 +27,60 @@ function broadCastDatabaseInititation()
 }
 
 
-function wineDataBaseModellSchema()
+
+
+
+class Wine
 {
-  if(wineDataBaseSchema==null)
+
+  static function wineDataBaseModellSchema()
   {
-  var wineDataBaseSchema = new Schema({
-    id: Number,
-    name:String,
-    year:Number,
-    country:String,
-    type: String,
-    description: String
-  });
+    if(wineDataBaseSchema==null)
+    {
+    wineDataBaseSchema = new Schema({
+      id: Number,
+      name:String,
+      year:Number,
+      country:String,
+      type: String,
+      description: String
+    });
+    }
+    return wineDataBaseSchema;
   }
-return wineDataBaseSchema;
+
+  constructor(name,year,country,type)
+  {
+    //put verficitation of parameters here
+    this.model=new WineModel({name: name,year:year,country:country,type:type,description:''});
+
+  }
+
+  static function isLegalWineType(typeKandidate)
+  {
+    return(typeKandidate=="rose" || typeKandidate=="red" || typeKandidate=="white")
+  }
+
+  updateDescription(newDescriptionOfWine)
+  {
+    this.descrption=newDescriptionOfWine;
+  }
+
+  updateYear(updatedYear)
+  {
+    this.year=updatedYear;
+  }
+
+  updateCountry(updatedCountry)
+  {
+    this.country=updatedCountry;
+  }
+
+  updateCountry(updatedCountry)
+  {
+    this.country=updatedCountry;
+  }
+
 }
 
 
@@ -49,6 +89,8 @@ function checkIfDatabaseIsInitialisedAndInitializeIfApplicable()
   if(isDataBaseInitialized())
   {
     console.log('initializing DataBase');
+
+  //  Wine.WineModel = mongoose.model('Wine', wineDataBaseModellSchema());
 
     // create table schmea here
     broadCastDatabaseInititation();
@@ -82,6 +124,7 @@ server.head('/hello/:name', respond);
 console.log('connecting to MongoDB: process.env.URL_to_MongoDB...');
 db=mongoose.connect(process.env.URL_to_MongoDB);
 //Schema=mongoose.Schema;
+Wine.WineModel = mongoose.model('WineModel', Wine.wineDataBaseModellSchema());
 console.log('successfull.\n');
 
 console.log('Checking database...');
