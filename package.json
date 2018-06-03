@@ -3,9 +3,7 @@
   "name": "VirtualWineCellar",
   "version": "0.0.0",
   "description": "A JavaScript RESTful API using MongoDB for providing a virtual wine cellar. Deployed on Heroku.",
-  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "index.js",
