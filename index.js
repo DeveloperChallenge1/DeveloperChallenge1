@@ -2,12 +2,37 @@
 
 var restify = require('restify');
 var mongoose = require('mongoose');
+const String trueLiteral='true';
+
+
+boolean funtion isTrue(String environmentVariable)
+{
+  return(environmentVariable== trueLiteral)
+}
+
+function boolean isDebugging()
+{
+  return isTrue(process.env.isDebugging);
+}
+
+function boolean isDataBaseInitialized()
+{
+    return isTrue(process.env.database_initiated);
+}
+
+function broadCastDatabaseInititation()
+{
+    process.env.database_initiated = trueLiteral;
+}
 
 
 function checkIfDatabaseIsInitialisedAndInitializeIfApplicable()
 {
-  if(process.env.database_initiated)
+
+  if(isDataBaseInitialized())
   {
+    console.log('initializing DataBase');
+    broadCastDatabaseInititation();
     console.log('db is initialized');
   }
   else
@@ -23,7 +48,7 @@ function respond(req, res, next) {
   res.contentType= 'json';
   res.header('content-type', 'json');
   res.send({name: 'tester2',id: '7'});
-    console.log('responding: hello + %s \n', req.params.name);
+  if(isDebugging())console.log('responding: hello + %s \n', req.params.name);
   next();
 }
 
@@ -35,10 +60,10 @@ server.head('/hello/:name', respond);
 
 
 console.log('connecting to MongoDB: process.env.URL_to_MongoDB...');
-
 db=mongoose.connect(process.env.URL_to_MongoDB);
 //Schema=mongoose.Schema;
 console.log('successfull.\n');
+
 console.log('Checking database...');
 checkIfDatabaseIsInitialisedAndInitializeIfApplicable();
 console.log('finished.\n');
