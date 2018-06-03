@@ -35,10 +35,11 @@ server.head('/hello/:name', respond);
 
 
 console.log('connecting to MongoDB: process.env.URL_to_MongoDB...');
+/*
 db=mongoose.connect(process.env.URL_to_MongoDB);
 Schema=mongoose.Schema;
 console.log('successfull.\n');
-
+*/
 
 
 server.listen(process.env.PORT, function() {
