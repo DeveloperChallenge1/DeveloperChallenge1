@@ -35,7 +35,7 @@ function broadCastDatabaseInititation()
   {
     if(wineDataBaseSchema==null)
     {
-      wineDataBaseSchema = new Schema({
+      wineDataBaseSchema = new mongoose.Schema({
       id: Number,
       name:String,
       year:Number,
