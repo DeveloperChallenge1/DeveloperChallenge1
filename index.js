@@ -83,7 +83,6 @@ function broadCastDatabaseInititation()
 
 
 
-}
 
 
 function checkIfDatabaseIsInitialisedAndInitializeIfApplicable()
