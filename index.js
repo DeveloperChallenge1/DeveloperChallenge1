@@ -1,7 +1,7 @@
 // process.env
 
 var restify = require('restify');
-var mongoose = require('mongoosei');
+var mongoose = require('mongoose');
 
 /*
 function checkIfDatabaseIsInitialisedAndInitializeIfApplicable()
