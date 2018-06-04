@@ -150,8 +150,10 @@ server.get('/hello/:name', respond);
 server.head('/hello/:name', respond);
 
 
-console.log('connecting to MongoDB: process.env.URL_to_MongoDB...');
-var db=mongoose.connect(process.env.URL_to_MongoDB);
+console.log('connecting to MongoDB: $s ...',process.env.URL_to_MongoDB);
+
+mongoose.connect(process.env.URL_to_MongoDB);
+var db=mongoose.connection;
 //db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 WineModel = mongoose.model('WineModel',getWineDataBaseSchema());
