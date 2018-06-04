@@ -147,6 +147,8 @@ console.log('VirtualWineCellar started.\n');
 var server = restify.createServer({
   acceptable: 'application/json',
 });
+server.use(restify.plugins.queryParser());
+
 server.get('/hello/:name', respond);
 server.head('/hello/:name', respond);
 
@@ -176,7 +178,6 @@ console.log('successfull.\n');
 console.log('Checking database...');
 checkIfDatabaseIsInitialisedAndInitializeIfApplicable();
 console.log('finished.\n');
-
 
 
 server.listen(process.env.PORT, function() {
