@@ -154,14 +154,15 @@ console.log('connecting to MongoDB: $s ...',process.env.URL_to_MongoDB);
 
 mongoose.connect(process.env.URL_to_MongoDB);
 var db=mongoose.connection;
-//db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 WineModel = mongoose.model('WineModel',getWineDataBaseSchema());
-console.log('...connected to database and created WineModel...\n');
-});
-console.log('successfull.\n');
+console.log('...connected to database. Adding routes...\n');
 
 server.post('/wines/:name/:year/:country/:type', WineModel.addNewWine);
+
+});
+console.log('successfull.\n');
 
 
 console.log('Checking database...');
