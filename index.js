@@ -159,7 +159,7 @@ console.log('...connected to database and created WineModel...\n');
 }
 console.log('successfull.\n');
 
-server.get('/wines/:name/:year/:country/:type', WineModel.addNewWine);
+server.post('/wines/:name/:year/:country/:type', WineModel.addNewWine);
 
 
 console.log('Checking database...');
