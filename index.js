@@ -92,7 +92,7 @@ function broadCastDatabaseInititation()
       {
       //  if(isLegalParameterSetForCreatingWine(name,year,country,type)) return false;//TODO throw Error
         //if(isDebugging())console.log('creating wine with id %s.',this.id);
-        var newWine=new WineModel(id:req.params.id,name:req.params.name,year:req.params.year,country:req.params.country,type:req.params.type);
+        var newWine=new WineModel({id:req.params.id,name:req.params.name,year:req.params.year,country:req.params.country,type:req.params.type});
         newWine.save(callbackForDatabaseOperations);
         //TODO add response
       }
