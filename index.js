@@ -4,7 +4,7 @@ var restify = require('restify');
 var mongoose = require('mongoose');
 const trueLiteral='true';
 var wineDataBaseSchema=null;
-var WineModell=null;
+var WineModel=null;
 
 
 function isTrue(environmentVariable)
@@ -68,6 +68,34 @@ function broadCastDatabaseInititation()
       {
         this.name=updatedName;
       }
+
+      wineDataBaseSchema.methods.isLegalParameterSetForCreatingWine=function(name,year,country,type)
+      {
+        return true;//TODO add checking
+      }
+
+      wineDataBaseSchema.methods.getNextFreeWineId=function()
+      {
+        if(isDebugging()) console.log('highest id of a wine is %s, but a new id is assigned right now.',process.env.lastAssignedWineId);
+
+        return ++process.env.lastAssignedWineId;
+      }
+
+      wineDataBaseSchema.methods.callbackForDatabaseOperations=function(wasThereError,modelThatCausedTheError)
+      {
+        if (wasThereError) return console.error(wasThereError);
+        if(isDebugging())  console.log('callback finished.');
+      }
+
+
+      wineDataBaseSchema.methods.addNewWine=function(req,res,next)
+      {
+      //  if(isLegalParameterSetForCreatingWine(name,year,country,type)) return false;//TODO throw Error
+        //if(isDebugging())console.log('creating wine with id %s.',this.id);
+        var newWine=new WineModel(id:req.params.id,name:req.params.name,year:req.params.year,country:req.params.country,type:req.params.type);
+        newWine.save(callbackForDatabaseOperations);
+        //TODO add response
+      }
     }
     return wineDataBaseSchema;
   }
@@ -123,10 +151,16 @@ server.head('/hello/:name', respond);
 
 
 console.log('connecting to MongoDB: process.env.URL_to_MongoDB...');
-db=mongoose.connect(process.env.URL_to_MongoDB);
-//Schema=mongoose.Schema;
+var db=mongoose.connect(process.env.URL_to_MongoDB);
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
 WineModel = mongoose.model('WineModel',getWineDataBaseSchema());
+console.log('...connected to database and created WineModel...\n');
+}
 console.log('successfull.\n');
+
+server.post('/wines/:name/:year/:country/:type', WineModel.addNewWine);
+
 
 console.log('Checking database...');
 checkIfDatabaseIsInitialisedAndInitializeIfApplicable();
