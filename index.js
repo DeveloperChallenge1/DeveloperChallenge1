@@ -152,7 +152,7 @@ server.head('/hello/:name', respond);
 
 console.log('connecting to MongoDB: process.env.URL_to_MongoDB...');
 var db=mongoose.connect(process.env.URL_to_MongoDB);
-db.on('error', console.error.bind(console, 'connection error:'));
+//db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 WineModel = mongoose.model('WineModel',getWineDataBaseSchema());
 console.log('...connected to database and created WineModel...\n');
