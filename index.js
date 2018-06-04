@@ -162,7 +162,7 @@ console.log('...connected to database. Adding routes...\n');
 
 //server.post('/wines/:name/:year/:country/:type', WineModel.addNewWine);
 
-server.post('/wines/:name', function(res,req,next)
+server.post('/wines/:name/:year/:country/:type', function(res,req,next)
 {
   WineModel.addNewWine(res,req,next);
 });
