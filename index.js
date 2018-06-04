@@ -160,7 +160,12 @@ db.once('open', function() {
 WineModel = mongoose.model('WineModel',getWineDataBaseSchema());
 console.log('...connected to database. Adding routes...\n');
 
-server.post('/wines/:name/:year/:country/:type', WineModel.addNewWine);
+//server.post('/wines/:name/:year/:country/:type', WineModel.addNewWine);
+
+server.post('/wines/:name', function(res,req,next)
+{
+  WineModel.addNewWine(res,req,next);
+});
 
 console.log('successfully added routes.\n');
 
