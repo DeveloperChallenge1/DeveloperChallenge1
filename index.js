@@ -156,7 +156,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 WineModel = mongoose.model('WineModel',getWineDataBaseSchema());
 console.log('...connected to database and created WineModel...\n');
-}
+});
 console.log('successfull.\n');
 
 server.post('/wines/:name/:year/:country/:type', WineModel.addNewWine);
